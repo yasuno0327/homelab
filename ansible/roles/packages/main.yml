@@ -1,0 +1,18 @@
+- name: install dnf packages
+  ansible.builtin.dnf:
+    name:
+      - vim-enhanced
+      - jq
+      - lsof
+      - strace
+      - sysstat
+      - tcpdump
+      - tmux
+      - gcc
+      - gcc-c++
+      - make
+      - git
+      - nc
+      - avahi
+    state: latest
+    become: yes

@@ -1,0 +1,5 @@
+- hosts: homelab_servers
+  become: yes
+  roles:
+    - packages
+    - docker

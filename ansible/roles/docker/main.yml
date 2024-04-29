@@ -1,0 +1,27 @@
+- name: install docker
+  dnf: name=docker state=latest
+  become: yes
+
+- name: start docker deamon
+  service:
+    name: docker
+    state: started
+    enabled: true
+
+- name: check docker compose
+  shell: docker compose version
+  register: compose_installed
+  ignore_errors: True
+  become: yes
+
+- name: add repo docker-ce
+  shell: dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
+  args:
+    creates: /etc/yum.repos.d/docker-ce.repo
+  when: compose_installed is failed
+  become: yes
+
+- name: install docker compose
+  shell: dnf install -y docker-compose-plugin
+  when: compose_installed is failed
+  become: yes
