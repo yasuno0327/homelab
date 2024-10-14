@@ -1,0 +1,31 @@
+- name: install docker dependencies
+  ansible.builtin.apt:
+    name:
+      - ca-certificates
+      - curl
+
+- name: Add Docker GPG apt key
+  ansible.builtin.apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+
+- name: Add Docker Repository
+  ansible.builtin.apt_repository:
+    repo: deb https://download.docker.com/linux/ubuntu focal stable
+    state: present
+
+- name: install docker
+  ansible.builtin.apt:
+    update_cache: true
+    name:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      - docker-buildx-plugin
+      - docker-compose-plugin 
+
+- name: start docker deamon
+  service:
+    name: docker
+    state: started
+    enabled: true

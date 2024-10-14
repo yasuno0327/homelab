@@ -1,7 +1,10 @@
-- name: install dnf packages
-  ansible.builtin.dnf:
+
+- name: install apt packages
+  ansible.builtin.apt:
+    update_cache: yes
+    autoremove: yes
     name:
-      - vim-enhanced
+      - vim
       - jq
       - lsof
       - strace
@@ -9,10 +12,8 @@
       - tcpdump
       - tmux
       - gcc
-      - gcc-c++
       - make
       - git
-      - nc
-      - avahi
+      - avahi-daemon
+      - firewalld
     state: latest
-    become: yes

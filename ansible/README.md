@@ -93,3 +93,11 @@ ssh出来るか試しておく
 ```shell
 ssh root@<設定したホスト名>
 ```
+
+# ansibleの適用
+
+```
+cd ansible
+ansible-playbook -i inventories playbook.yml -u <ChangeToYourSshUser>
+# (inventoriesはinventories/raspberrypi4のようにファイル指定可能,将来的にinventoryが増えたら別々で適用する)
+```
